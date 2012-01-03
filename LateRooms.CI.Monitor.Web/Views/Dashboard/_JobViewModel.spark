@@ -1,0 +1,17 @@
+﻿<viewdata job="LateRooms.CI.Monitor.Web.ViewModels.JobViewModel" />
+<use namespace="System.Web.Mvc.Html" />
+
+<a href="${job.Url + (job.Status ? "" : "console")}" class="monitor success?{job.Status}">
+	<div class="jobprogress" style="width:${job.Progress}%">&nbsp;</div>
+	<div class="jobdetail">
+		<span if="job.QueuePosition > 0" class="jobqueuepos jobqueuepos">
+			<span class="indicator">&nbsp;</span>
+			<span if="job.QueuePosition > 1" class="indicator">&nbsp;</span>
+			<span if="job.QueuePosition > 2" class="indicator">&nbsp;</span>
+		</span>
+		<span class="jobname">${job.Name}</span>
+		<span class="jobparams" if="job.LastBuildParameters.ContainsKey('version')">[${job.LastBuildParameters["version"]}]</span>
+		<span if="job.LastBuildRevision > 0" class="revision">r${job.LastBuildRevision}</span>
+		<span if="!job.Status" class="user">(${job.LastBuildUser})</span>
+	</div>
+</a>
