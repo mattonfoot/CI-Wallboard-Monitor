@@ -35,7 +35,7 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Mappers
 					.Select(changeset => new SVNChangeSet(changeset.User, changeset.Revision));
 			}
 
-			return new List<SVNChangeSet>();
+			return Enumerable.Empty<SVNChangeSet>();
 		}
 	}
 }

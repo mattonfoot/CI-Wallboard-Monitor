@@ -17,8 +17,10 @@
 			</div>
 			
 			<div class="monitors">
-				<div class="servermonitor">
-					!{Model.Monitor}
+				<div class="row servermonitor">
+					<div each="var monitor in Model.Monitors" class="column">
+						!{monitor}
+					</div>
 				</div>
 			</div>
 			
@@ -29,7 +31,7 @@
 					<div each="var column in buildserver.Pipelines" class="column" style="width:${99 / buildserver.Columns}%">
 						<div each="var pipeline in column" class="pipeline">
 							<div each="var pipelineStage in pipeline.Stages" class="row stage">
-								<div each="var pipelinejob in pipelineStage.Jobs" class="column job" style="width:${99 / pipelineStage.Jobs.Count}%">
+								<div each="var pipelinejob in pipelineStage.Jobs" class="column job" style="width:${99 / pipelineStage.NumberOfJobs}%">
 									<use file="_JobViewModel" job="pipelinejob" />
 								</div>
 							</div>

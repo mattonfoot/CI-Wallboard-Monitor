@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LateRooms.CI.Monitor.Web.ViewModels
 {
@@ -7,8 +8,8 @@ namespace LateRooms.CI.Monitor.Web.ViewModels
 	{
 		public JobViewModel()
 		{
-			UpstreamJobs = new List<JobViewModel>();
-			DownstreamJobs = new List<JobViewModel>();
+			UpstreamJobs = Enumerable.Empty<JobViewModel>();
+			DownstreamJobs = Enumerable.Empty<JobViewModel>();
 			LastBuildParameters = new Dictionary<string, string>();
 		}
 

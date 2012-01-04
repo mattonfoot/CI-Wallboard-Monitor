@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LateRooms.CI.Monitor.Web.ViewModels
 {
@@ -9,13 +10,13 @@ namespace LateRooms.CI.Monitor.Web.ViewModels
 			Name = name;
 			Columns = columns;
 
-			Pipelines = new List<List<PipelineViewModel>>();
+			Pipelines = Enumerable.Empty<IEnumerable<PipelineViewModel>>();
 		}
 
 		public string Name { get; private set; }
 
 		public int Columns { get; private set; }
 
-		public List<List<PipelineViewModel>> Pipelines { get; set; }
+		public IEnumerable<IEnumerable<PipelineViewModel>> Pipelines { get; set; }
 	}
 }

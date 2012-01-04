@@ -5,7 +5,7 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Mappers
 {
 	public static class ProjectBuildQueueMapper
 	{
-		public static ProjectBuildQueue FromHudsonAPI(IList<Project> queue)
+		public static ProjectBuildQueue FromHudsonAPI(IEnumerable<Project> queue)
 		{
 			return new ProjectBuildQueue(queue);
 		}

@@ -46,8 +46,8 @@ namespace LateRooms.CI.Monitor.Web.ViewModels.Builders
 			       		StartTime = _project.CurrentBuild.Timestamp,
 			       		Progress = _project.CurrentBuildProgress,
 			       		Url = _project.CurrentBuild.URL,
-			       		//UpstreamJobs = _project.UpstreamProjects.Select(x => new JobViewModelBuilder(x).Build()).ToList(),
-								DownstreamJobs = _project.DownstreamProjects.Select(x => new JobViewModelBuilder(x).Build()).ToList()
+			       		//UpstreamJobs = _project.UpstreamProjects.Select(x => new JobViewModelBuilder(x).Build()),
+								DownstreamJobs = _project.DownstreamProjects.Select(x => new JobViewModelBuilder(x).Build())
 							};
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LateRooms.CI.Monitor.Web.Service.Models
 {
@@ -42,7 +43,7 @@ namespace LateRooms.CI.Monitor.Web.Service.Models
 	class NullBuildJob : BuildJob
 	{
 		public NullBuildJob()
-			: base(string.Empty, string.Empty, 0, string.Empty, true, 0, 0, false, new List<SVNChangeSet>(), new Dictionary<string, string>())
+			: base(string.Empty, string.Empty, 0, string.Empty, true, 0, 0, false, Enumerable.Empty<SVNChangeSet>(), new Dictionary<string, string>())
 		{
 		}
 	}

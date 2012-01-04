@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LateRooms.CI.Monitor.Web.ViewModels
 {
@@ -6,10 +7,9 @@ namespace LateRooms.CI.Monitor.Web.ViewModels
 	{
 		public PipelineViewModel()
 		{
-			Stages = new List<StageViewModel>();
+			Stages = Enumerable.Empty<StageViewModel>();
 		}
 
-
-		public List<StageViewModel> Stages { get; set; }
+		public IEnumerable<StageViewModel> Stages { get; set; }
 	}
 }

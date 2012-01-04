@@ -10,7 +10,7 @@ namespace LateRooms.CI.Monitor.Web.ViewModels.Builders
 	public class DashboardViewModelBuilder
 	{
 		private readonly Dictionary<string, ProjectList> _projectServers = new Dictionary<string, ProjectList>();
-		private string _monitorHtml;
+		private IEnumerable<string> _monitors;
 		private MonitorConfig _config;
 
 		public static DashboardViewModelBuilder Get()
@@ -24,9 +24,9 @@ namespace LateRooms.CI.Monitor.Web.ViewModels.Builders
 			return this;
 		}
 
-		public DashboardViewModelBuilder WithMonitor(string monitorHtml)
+		public DashboardViewModelBuilder WithMonitor(IEnumerable<string> monitorHtml)
 		{
-			_monitorHtml = monitorHtml;
+			_monitors = monitorHtml;
 			return this;
 		}
 
@@ -52,23 +52,23 @@ namespace LateRooms.CI.Monitor.Web.ViewModels.Builders
 
 				        		if (server.Filters.Count > 0)
 				        		{
-				        			models.AddRange(FilteredPipelineViewModels(server.Name, server.Filters));
+											models.AddRange(FilteredPipelineViewModels(server.Name, server.Filters));
 				        		}
 
-				        		if (models.Count == 0)
+				        		if (models.Count() == 0)
 				        		{
 				        			var allProjects = _projectServers[server.Name].Projects.Select(pipe => GetPipeline(pipe));
 
-				        			models.AddRange(allProjects);
+											models.AddRange(allProjects);
 				        		}
 
 				        		var numCols = server.Columns > 0 ? server.Columns : 1;         
 				        		var current = 0;
-										var columnsize = (models.Count / numCols) + (models.Count % numCols > 0 ? 1 : 0);
-										var columns = new List<List<PipelineViewModel>>();
+										var columnsize = (models.Count() / numCols) + (models.Count() % numCols > 0 ? 1 : 0);
+										var columns = new List<IEnumerable<PipelineViewModel>>();
 										for (var i = 0; i < server.Columns; i++ )
 										{
-											columns.Add( models.Skip(current).Take(columnsize).ToList() );
+											columns.Add( models.Skip(current).Take(columnsize) );
 											current += columnsize;
 										}
 
@@ -77,9 +77,9 @@ namespace LateRooms.CI.Monitor.Web.ViewModels.Builders
 
 			return new DashboardViewModel
 			       	{
-								BuildServers = buildServerViewModels.ToList(),
+								BuildServers = buildServerViewModels,
 								DashboardName = _config.Description,
-								Monitor = _monitorHtml
+								Monitors = _monitors
 			       	};
 		}
 
@@ -127,26 +127,26 @@ namespace LateRooms.CI.Monitor.Web.ViewModels.Builders
 
 		private static PipelineViewModel GetPipeline(Project projectpipe)
 		{
-			var pipeline = new PipelineViewModel();
+			var stages = new List<StageViewModel>();
 
 			var firstStage = new StageViewModel { Jobs = new List<JobViewModel> { JobViewModelBuilder.From(projectpipe).Build() } };
-			pipeline.Stages.Add(firstStage);
+			stages.Add(firstStage);
 
 			var stage = GetNextStage(firstStage.Jobs);
 			while (stage != null)
 			{
-				pipeline.Stages.Add(stage);
+				stages.Add(stage);
 				stage = GetNextStage(stage.Jobs);
 			}
 
-			return pipeline;
+			return new PipelineViewModel { Stages = stages };
 		}
 
 		private static StageViewModel GetNextStage(IEnumerable<JobViewModel> jobs)
 		{
 			var downstreamJobs = jobs.SelectMany(x => x.DownstreamJobs).Distinct(new JobViewModelComparer());
 
-			return downstreamJobs.Count() == 0 ? null : new StageViewModel { Jobs = downstreamJobs.ToList() };
+			return downstreamJobs.Count() == 0 ? null : new StageViewModel { Jobs = downstreamJobs, NumberOfJobs = downstreamJobs.Count()};
 		}
 	}
 }

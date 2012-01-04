@@ -49,8 +49,7 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson
 			var response = QueueRepository.Get(request);
 			var projectBuildQueue = response.Items
 																			.Where(build => build.Task != null)
-																			.Select(build => GetProject(build.Task.Name))
-																			.ToList();
+																			.Select(build => GetProject(build.Task.Name));
 
 			_cachedQueue = ProjectBuildQueueMapper.FromHudsonAPI(projectBuildQueue);
 

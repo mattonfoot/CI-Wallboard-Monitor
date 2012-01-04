@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LateRooms.CI.Monitor.Web.ViewModels
 {
@@ -6,19 +7,16 @@ namespace LateRooms.CI.Monitor.Web.ViewModels
 	{
 		public DashboardViewModel()
 		{
-			BuildServers = new List<BuildServerViewModel>();
-
-			Jobs = new List<JobViewModel>();
+			Monitors = Enumerable.Empty<string>();
+			BuildServers = Enumerable.Empty<BuildServerViewModel>();
 		}
-
-		public string Monitor { get; set; }
 
 		public string DashboardName { get; set; }
 
 		public string Error { get; set; }
 
-		public List<BuildServerViewModel> BuildServers { get; set; }
-    
-		public List<JobViewModel> Jobs { get; set; }
+		public IEnumerable<string> Monitors { get; set; }
+
+		public IEnumerable<BuildServerViewModel> BuildServers { get; set; }
 	}
 }

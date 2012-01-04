@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace LateRooms.CI.Monitor.Web.ViewModels
 {
@@ -6,9 +7,12 @@ namespace LateRooms.CI.Monitor.Web.ViewModels
 	{
 		public StageViewModel()
 		{
-			Jobs = new List<JobViewModel>();
+			Jobs = Enumerable.Empty<JobViewModel>();
+			NumberOfJobs = 1;
 		}
 
-		public List<JobViewModel> Jobs { get; set; }
+		public int NumberOfJobs { get; set; }
+
+		public IEnumerable<JobViewModel> Jobs { get; set; }
 	}
 }

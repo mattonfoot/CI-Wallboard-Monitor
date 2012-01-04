@@ -4,11 +4,11 @@ namespace LateRooms.CI.Monitor.Web.Service.Models
 {
 	public class ProjectBuildQueue
 	{
-		public ProjectBuildQueue(IList<Project> queue)
+		public ProjectBuildQueue(IEnumerable<Project> queue)
 		{
 			Items = queue;
 		}
 
-		public IList<Project> Items { get; private set; }
+		public IEnumerable<Project> Items { get; private set; }
 	}
 }
