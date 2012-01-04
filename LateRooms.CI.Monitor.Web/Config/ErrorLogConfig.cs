@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-using LateRooms.CI.Monitor.Web.Controllers;
 
 namespace LateRooms.CI.Monitor.Web.Config
 {

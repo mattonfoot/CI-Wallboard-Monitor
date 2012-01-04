@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LateRooms.CI.Monitor.Web", ".\LateRooms.CI.Monitor.Web\LateRooms.CI.Monitor.Web.csproj", "{4410A829-9596-4C46-A1C2-98A44CC1F0C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LateRooms.CI.Monitor.Web", "LateRooms.CI.Monitor.Web\LateRooms.CI.Monitor.Web.csproj", "{4410A829-9596-4C46-A1C2-98A44CC1F0C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LateRooms.CI.Monitor.Test", ".\LateRooms.CI.Monitor.Test\LateRooms.CI.Monitor.Test.csproj", "{A1D5E08B-1EE3-4FB8-8CB1-A28D455B16E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LateRooms.CI.Monitor.Test", "LateRooms.CI.Monitor.Test\LateRooms.CI.Monitor.Test.csproj", "{A1D5E08B-1EE3-4FB8-8CB1-A28D455B16E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

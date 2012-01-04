@@ -32,7 +32,7 @@ namespace LateRooms.CI.Monitor.Web.Helpers
 					xmlDoc.Load(filepath);
 					ScopedCacheWrapper.Insert(cacheKey, xmlDoc, 60);
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					new TResponse();
 				}

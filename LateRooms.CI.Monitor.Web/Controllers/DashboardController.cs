@@ -20,44 +20,56 @@ namespace LateRooms.CI.Monitor.Web.Controllers
 		public ActionResult Index()
 		{
 			// model
-			var model = DashboardViewModelBuilder.Get();
+			var modelBuilder = DashboardViewModelBuilder.Get();
 
 			// config
-			var configpath = Server.MapPath("~/Monitors.config");
-
-			var cache = new RequestScopedCacheWrapper();
-			var xmlFileLoader = new XmlFileLoader(cache);
-			var config = new ConfigLoader(xmlFileLoader).From(configpath);
-
-			model.WithConfig(config);
+			var config = GetConfig("~/Monitors.config");
+			modelBuilder.WithConfig(config);
 
 			// liveserver monitors
-			if (config.LiveServers != null && !string.IsNullOrEmpty(config.LiveServers.ServiceUri))
-			{
-				var web = new HtmlWeb();
-				var htmlDocument = web.Load(config.LiveServers.ServiceUri);
-				var document = htmlDocument.DocumentNode;
-
-				var monitorHtml = string.Join("", document.QuerySelectorAll(config.LiveServers.CssNodeFilter)
-					.Where(x => IsMonitoredServer(config.LiveServers.Servers, x.InnerText))
-					.Select(x => x.OuterHtml).ToArray());
-
-				model.WithMonitor(monitorHtml);
+			if (config.LiveServers != null) {
+				var monitorHtml = GetMonitorHtml(config.LiveServers);
+				modelBuilder.WithMonitor(monitorHtml);
 			}
 
 			// buildservers
 			if (config.BuildServers != null)
 			{
-				foreach (var buildServerConfig in config.BuildServers.Servers)
-				{
-					var buildservertype = (CIServerType) Enum.Parse(typeof (CIServerType), buildServerConfig.Type);
-					var projectListRetriever = new ProjectListRetriever(buildservertype, buildServerConfig.ServiceUri);
-
-					model.AddServerProjects(buildServerConfig.Name, projectListRetriever.GetProjectList());
-				}
+				config.BuildServers.Servers
+					.ForEach(buildServerConfig => addProjectsToModel(buildServerConfig, modelBuilder));
 			}
 
-			return View(model.Build());
+			return View(modelBuilder.Build());
+		}
+
+		private void addProjectsToModel(BuildServerConfig config, DashboardViewModelBuilder builder)
+		{
+			var buildservertype = (CIServerType)Enum.Parse(typeof(CIServerType), config.Type);
+			var projectListRetriever = new ProjectListRetriever(buildservertype, config.ServiceUri);
+
+			builder.AddServerProjects(config.Name, projectListRetriever.GetProjectList());
+		}
+
+		private string GetMonitorHtml(LiveServersConfig config)
+		{
+			if (string.IsNullOrEmpty(config.ServiceUri))
+				return string.Empty;
+
+			var web = new HtmlWeb();
+			var htmlDocument = web.Load(config.ServiceUri);
+			var document = htmlDocument.DocumentNode;
+
+			return string.Join("", document.QuerySelectorAll(config.CssNodeFilter)
+			                              	.Where(x => IsMonitoredServer(config.Servers, x.InnerText))
+			                              	.Select(x => x.OuterHtml).ToArray());
+		}
+
+		private MonitorConfig GetConfig(string configpath)
+		{
+			var requestscopecache = new RequestScopedCacheWrapper();
+			var xmlFileLoader = new XmlFileLoader(requestscopecache);
+
+			return new ConfigLoader(xmlFileLoader).From(Server.MapPath(configpath));
 		}
 
 		private static bool IsMonitoredServer(IEnumerable<LiveServerConfig> servers, string monitor)

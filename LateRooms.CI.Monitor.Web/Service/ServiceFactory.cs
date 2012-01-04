@@ -19,18 +19,18 @@ namespace LateRooms.CI.Monitor.Web.Service
 		public HudsonCIApiService BuildHudsonCIApiService()
 		{
 			return new HudsonCIApiService(
-				BuildHudsonFeedRepository<HudsonProjectListRequest, HudsonProjectListResponse>(_serverUri),
-				BuildHudsonFeedRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse>(_serverUri),
-				BuildHudsonFeedRepository<HudsonQueueRequest, HudsonQueueResponse>(_serverUri),
-				BuildHudsonFeedRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse>(_serverUri)
+				BuildXmlRepository<HudsonProjectListRequest, HudsonProjectListResponse>(_serverUri, "request"),
+				BuildXmlRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse>(_serverUri, "request"),
+				BuildXmlRepository<HudsonQueueRequest, HudsonQueueResponse>(_serverUri, "request"),
+				BuildXmlRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse>(_serverUri, "request")
 			);
 		}
 
-		private static IRepository<TRequest, TResponse> BuildHudsonFeedRepository<TRequest, TResponse>(string serverUri)
+		private static IRepository<TRequest, TResponse> BuildXmlRepository<TRequest, TResponse>(string serverUri, string cachescope)
 			where TRequest : new()
 			where TResponse : new()
 		{
-			var scope = ObjectFactory.GetInstance<IScopedCacheWrapper>();
+			var scope = ObjectFactory.GetNamedInstance<IScopedCacheWrapper>(cachescope);
 
 			return new XmlRepository<TRequest, TResponse>(scope) { ServerUri = serverUri };
 		}

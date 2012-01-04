@@ -17,6 +17,7 @@ namespace LateRooms.CI.Monitor.Web.Config
 				});
 
 				x.For<IScopedCacheWrapper>().Use<RequestScopedCacheWrapper>();
+				x.For<IScopedCacheWrapper>().Use<RequestScopedCacheWrapper>().Named("request");
 
 				x.For(typeof(IRepository<,>)).Use(typeof(XmlRepository<,>));
 			});
