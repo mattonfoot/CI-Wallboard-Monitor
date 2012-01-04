@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using LateRooms.CI.Monitor.Web.Mappers;
-using LateRooms.CI.Monitor.Web.Repositories;
+using LateRooms.CI.Monitor.Web.Service.Connectors;
+using LateRooms.CI.Monitor.Web.Service.Hudson.Mappers;
 using LateRooms.CI.Monitor.Web.Service.Hudson.Requests;
 using LateRooms.CI.Monitor.Web.Service.Hudson.Responses;
 using LateRooms.CI.Monitor.Web.Service.Models;
@@ -11,16 +10,16 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson
 {
 	public class HudsonCIApiService : ICIApiService
 	{
-		private IFeedRepository<HudsonProjectListRequest, HudsonProjectListResponse> ProjectListRepository { get; set; }
-		private IFeedRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse> ProjectRepository { get; set; }
-		private IFeedRepository<HudsonQueueRequest, HudsonQueueResponse> QueueRepository { get; set; }
-		private IFeedRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse> BuildRepository { get; set; }
+		private IRepository<HudsonProjectListRequest, HudsonProjectListResponse> ProjectListRepository { get; set; }
+		private IRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse> ProjectRepository { get; set; }
+		private IRepository<HudsonQueueRequest, HudsonQueueResponse> QueueRepository { get; set; }
+		private IRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse> BuildRepository { get; set; }
 
 		public HudsonCIApiService(
-			IFeedRepository<HudsonProjectListRequest, HudsonProjectListResponse> projectListRepository,
-			IFeedRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse> projectRepository,
-			IFeedRepository<HudsonQueueRequest, HudsonQueueResponse> queueRepository,
-			IFeedRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse> buildRepository)
+			IRepository<HudsonProjectListRequest, HudsonProjectListResponse> projectListRepository,
+			IRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse> projectRepository,
+			IRepository<HudsonQueueRequest, HudsonQueueResponse> queueRepository,
+			IRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse> buildRepository)
 		{
 			QueueRepository = queueRepository;
 			ProjectListRepository = projectListRepository;
@@ -30,21 +29,14 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson
 
 		public ProjectList GetProjectList()
 		{
-			try
-			{
-				var request = new HudsonProjectListRequest();
-				var response = ProjectListRepository.Get(request);
+			var request = new HudsonProjectListRequest();
+			var response = ProjectListRepository.Get(request);
 
-				var jobList = response.Jobs
-															.Select(job => GetProject(job.Name))
-															.Where(job => job.UpstreamProjects.Count() == 0);
-	     
-				return ProjectListMapper.FromHudsonAPI(response.NodeDescription, jobList);
-			}
-			catch (Exception e)
-			{
-				return new ProjectList(e.Message);
-			}
+			var jobList = response.Jobs
+														.Select(job => GetProject(job.Name))
+														.Where(job => job.UpstreamProjects.Count() == 0);
+     
+			return ProjectListMapper.FromHudsonAPI(response.NodeDescription, jobList);
 		}
 
 		private ProjectBuildQueue _cachedQueue;
@@ -75,10 +67,21 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson
 
 			var response = ProjectRepository.Get(request);
 
-			var lastbuild = GetBuild(response.Name, response.LastCompletedBuild.Number);
-			var successfulbuild = GetBuild(response.Name, response.LastSuccessfulBuild.Number);
-			var completedbuild = GetBuild(response.Name, response.LastCompletedBuild.Number);
-			var currentbuild = GetBuild(response.Name, response.LastBuild.Number);
+			BuildJob lastbuild = new NullBuildJob();
+			if (response.LastCompletedBuild.Count > 0)
+				lastbuild = GetBuild(response.Name, response.LastCompletedBuild.First().Number);
+
+			BuildJob successfulbuild = new NullBuildJob();
+			if (response.LastSuccessfulBuild.Count > 0)
+				successfulbuild = GetBuild(response.Name, response.LastSuccessfulBuild.First().Number);
+
+			BuildJob completedbuild = new NullBuildJob();
+			if (response.LastCompletedBuild.Count > 0)
+				successfulbuild = GetBuild(response.Name, response.LastCompletedBuild.First().Number);
+
+			BuildJob currentbuild = new NullBuildJob();
+			if (response.LastBuild.Count > 0)
+				successfulbuild = GetBuild(response.Name, response.LastBuild.First().Number);
 
 			var upstreamProjects = response.UpstreamProjects
 																			.Select(x => GetProject(x.Name));
@@ -102,7 +105,7 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson
 			if (cachedBuild != null) return cachedBuild;
 
 			var request = new HudsonBuildRequest { Name = projectName, BuildNumber = buildNumber };
-
+			
 			var response = BuildRepository.Get(request);
 
 			var build = BuildJobMapper.FromHudsonAPI(projectName, response);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml;
-using LateRooms.CI.Monitor.Web.Repositories;
-using LateRooms.CI.Monitor.Web.Wrappers;
+using LateRooms.CI.Monitor.Web.Caching;
 
 namespace LateRooms.CI.Monitor.Web.Helpers
 {
@@ -35,11 +34,11 @@ namespace LateRooms.CI.Monitor.Web.Helpers
 				}
 				catch (Exception e)
 				{
-					throw new ServiceNotAvailableException(string.Format("File not available [{0}]", filepath), e);
+					new TResponse();
 				}
 			}
 
-			return XmlDeserializer.From<TResponse>(xmlDoc);
+			return XmlDeserializer.From<TResponse>(xmlDoc, xmlDoc.InnerText);
 		}
 	}
 }

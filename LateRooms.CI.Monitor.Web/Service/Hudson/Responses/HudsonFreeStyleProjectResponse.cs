@@ -12,11 +12,16 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 			Builds = new List<HudsonBuildResponse>();
 			HealthReports = new List<HudsonHealthReportResponse>();
 
-			LastBuild = new HudsonLastBuildResponse();
-			LastCompletedBuild = new HudsonLastCompletedBuildResponse();
+			LastBuild = new List<HudsonLastBuildResponse>();
+			LastCompletedBuild = new List<HudsonLastCompletedBuildResponse>();
+			LastFailedBuild = new List<HudsonLastFailedBuildResponse>();
+			LastStableBuild = new List<HudsonLastStableBuildResponse>();
+			LastSuccessfulBuild = new List<HudsonLastSuccessfulBuildResponse>();
+			LastUnsuccessfulBuild = new List<HudsonLastUnsuccessfulBuildResponse>();
 
 			DownstreamProjects = new List<HudsonDownstreamProjectResponse>();
 			UpstreamProjects = new List<HudsonUpstreamProjectResponse>();
+
 		}
 
 		[XmlElement(ElementName = "action")]
@@ -56,22 +61,22 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 		public bool KeepDependencies { get; set; }
 
 		[XmlElement(ElementName = "lastBuild")]
-		public HudsonLastBuildResponse LastBuild { get; set; }
+		public List<HudsonLastBuildResponse> LastBuild { get; set; }
 
 		[XmlElement(ElementName = "lastCompletedBuild")]
-		public HudsonLastCompletedBuildResponse LastCompletedBuild { get; set; }
+		public List<HudsonLastCompletedBuildResponse> LastCompletedBuild { get; set; }
 
 		[XmlElement(ElementName = "lastFailedBuild")]
-		public HudsonLastFailedBuildResponse LastFailedBuild { get; set; }
+		public List<HudsonLastFailedBuildResponse> LastFailedBuild { get; set; }
 
 		[XmlElement(ElementName = "lastStableBuild")]
-		public HudsonLastStableBuildResponse LastStableBuild { get; set; }
+		public List<HudsonLastStableBuildResponse> LastStableBuild { get; set; }
 
 		[XmlElement(ElementName = "lastSuccessfulBuild")]
-		public HudsonLastSuccessfulBuildResponse LastSuccessfulBuild { get; set; }
+		public List<HudsonLastSuccessfulBuildResponse> LastSuccessfulBuild { get; set; }
 
 		[XmlElement(ElementName = "lastUnsuccessfulBuild")]
-		public HudsonLastUnsuccessfulBuildResponse LastUnsuccessfulBuild { get; set; }
+		public List<HudsonLastUnsuccessfulBuildResponse> LastUnsuccessfulBuild { get; set; }
 
 		[XmlElement(ElementName = "nextBuildNumber", DataType = "long")]
 		public long NextBuildNumber { get; set; }

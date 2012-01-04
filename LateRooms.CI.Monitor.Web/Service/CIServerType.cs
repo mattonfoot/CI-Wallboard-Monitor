@@ -1,4 +1,4 @@
-﻿namespace LateRooms.CI.Monitor.Web.Enums
+﻿namespace LateRooms.CI.Monitor.Web.Service
 {
 	public enum CIServerType
 	{

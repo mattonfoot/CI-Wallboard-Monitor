@@ -1,4 +1,4 @@
-﻿namespace LateRooms.CI.Monitor.Web.Wrappers
+﻿namespace LateRooms.CI.Monitor.Web.Caching
 {
 	public interface IScopedCacheWrapper
 	{

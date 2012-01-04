@@ -5,7 +5,7 @@ using LateRooms.CI.Monitor.Web.Helpers;
 using LateRooms.CI.Monitor.Web.Service.Hudson.Responses;
 using LateRooms.CI.Monitor.Web.Service.Models;
 
-namespace LateRooms.CI.Monitor.Web.Service.Hudson
+namespace LateRooms.CI.Monitor.Web.Service.Hudson.Mappers
 {
 	public static class ProjectMapper
 	{

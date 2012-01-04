@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace LateRooms.CI.Monitor.Web.Builders
+namespace LateRooms.CI.Monitor.Web.Service.Connectors
 {
 	public class RequestUrlBuilder
 	{

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web.Mvc;
 using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
+using LateRooms.CI.Monitor.Web.Caching;
 using LateRooms.CI.Monitor.Web.Mvc;
-using LateRooms.CI.Monitor.Web.Builders;
 using LateRooms.CI.Monitor.Web.Config;
-using LateRooms.CI.Monitor.Web.Enums;
 using LateRooms.CI.Monitor.Web.Helpers;
-using LateRooms.CI.Monitor.Web.Wrappers;
+using LateRooms.CI.Monitor.Web.Service;
+using LateRooms.CI.Monitor.Web.ViewModels.Builders;
 
 namespace LateRooms.CI.Monitor.Web.Controllers
 {
@@ -32,22 +32,29 @@ namespace LateRooms.CI.Monitor.Web.Controllers
 			model.WithConfig(config);
 
 			// liveserver monitors
-			var web = new HtmlWeb();
-			var htmlDocument = web.Load(config.LiveServers.ServiceUri);
-			var document = htmlDocument.DocumentNode;
+			if (config.LiveServers != null && !string.IsNullOrEmpty(config.LiveServers.ServiceUri))
+			{
+				var web = new HtmlWeb();
+				var htmlDocument = web.Load(config.LiveServers.ServiceUri);
+				var document = htmlDocument.DocumentNode;
 
-			var monitorHtml = string.Join("", document.QuerySelectorAll(config.LiveServers.CssNodeFilter)
-				.Where(x => IsMonitoredServer(config.LiveServers.Servers, x.InnerText))
-				.Select(x => x.OuterHtml).ToArray());
+				var monitorHtml = string.Join("", document.QuerySelectorAll(config.LiveServers.CssNodeFilter)
+					.Where(x => IsMonitoredServer(config.LiveServers.Servers, x.InnerText))
+					.Select(x => x.OuterHtml).ToArray());
 
-			model.WithMonitor(monitorHtml);
+				model.WithMonitor(monitorHtml);
+			}
 
-			// buildserver
-			foreach(var buildServerConfig in config.BuildServers.Servers){
-				var buildservertype = (CIServerType)Enum.Parse(typeof(CIServerType), buildServerConfig.Type);
-				var projectListRetriever = new ProjectListRetriever(buildservertype, buildServerConfig.ServiceUri);
+			// buildservers
+			if (config.BuildServers != null)
+			{
+				foreach (var buildServerConfig in config.BuildServers.Servers)
+				{
+					var buildservertype = (CIServerType) Enum.Parse(typeof (CIServerType), buildServerConfig.Type);
+					var projectListRetriever = new ProjectListRetriever(buildservertype, buildServerConfig.ServiceUri);
 
-				model.AddServerProjects(buildServerConfig.Name, projectListRetriever.GetProjectList());
+					model.AddServerProjects(buildServerConfig.Name, projectListRetriever.GetProjectList());
+				}
 			}
 
 			return View(model.Build());

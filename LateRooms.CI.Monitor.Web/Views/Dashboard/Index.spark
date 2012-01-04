@@ -16,18 +16,23 @@
 				<p>${Model.Error}</p>
 			</div>
 			
-			<div class="servers">
+			<div class="monitors">
 				<div class="servermonitor">
 					!{Model.Monitor}
 				</div>
 			</div>
 			
-			<div each="var buildserver in Model.BuildServers" class="server">			
-
-				<div each="var pipeline in buildserver.Pipelines" class="pipeline">
-					<div each="var pipelineStage in pipeline.Stages" class="row stage">
-						<div each="var pipelinejob in pipelineStage.Jobs" class="column job" style="width:${100 / pipelineStage.Jobs.Count}%">
-							<use file="_JobViewModel" job="pipelinejob" />
+			<div each="var buildserver in Model.BuildServers" class="server">
+				<h2 class="server-title">${buildserver.Name}</h2>
+				
+				<div class="row">
+					<div each="var column in buildserver.Pipelines" class="column" style="width:${99 / buildserver.Columns}%">
+						<div each="var pipeline in column" class="pipeline">
+							<div each="var pipelineStage in pipeline.Stages" class="row stage">
+								<div each="var pipelinejob in pipelineStage.Jobs" class="column job" style="width:${99 / pipelineStage.Jobs.Count}%">
+									<use file="_JobViewModel" job="pipelinejob" />
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

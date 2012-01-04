@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web;
 
-namespace LateRooms.CI.Monitor.Web.Wrappers
+namespace LateRooms.CI.Monitor.Web.Caching
 {
 	public class RequestScopedCacheWrapper : IScopedCacheWrapper
 	{

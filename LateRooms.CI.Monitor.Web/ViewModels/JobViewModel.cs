@@ -28,7 +28,7 @@ namespace LateRooms.CI.Monitor.Web.ViewModels
 
 		public long LastBuildDuration { get; set; }
 
-		public Dictionary<string, string> LastBuildParameters { get; set; }
+		public IDictionary<string, string> LastBuildParameters { get; set; }
 
 		public int QueuePosition { get; set; }
 
@@ -42,8 +42,8 @@ namespace LateRooms.CI.Monitor.Web.ViewModels
 
 		public int DownstreamJobCount { get; set; }
 
-		public List<JobViewModel> UpstreamJobs { get; set; }
+		public IEnumerable<JobViewModel> UpstreamJobs { get; set; }
 
-		public List<JobViewModel> DownstreamJobs { get; set; }
+		public IEnumerable<JobViewModel> DownstreamJobs { get; set; }
 	}
 }

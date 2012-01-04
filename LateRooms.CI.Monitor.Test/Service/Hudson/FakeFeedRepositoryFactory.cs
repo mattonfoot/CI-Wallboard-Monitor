@@ -1,4 +1,4 @@
-﻿using LateRooms.CI.Monitor.Web.Repositories;
+﻿using LateRooms.CI.Monitor.Web.Service.Connectors;
 using LateRooms.CI.Monitor.Web.Service.Hudson.Requests;
 using LateRooms.CI.Monitor.Web.Service.Hudson.Responses;
 
@@ -6,28 +6,28 @@ namespace LateRooms.CI.Monitor.Test.Service.Hudson
 {
 	public static class FakeFeedRepositoryFactory
 	{
-		public static IFeedRepository<HudsonProjectListRequest, HudsonProjectListResponse> ProjectListRepository(HudsonProjectListResponse response)
+		public static IRepository<HudsonProjectListRequest, HudsonProjectListResponse> ProjectListRepository(HudsonProjectListResponse response)
 		{
 			return new FakeProjectListRepository(response);
 		}
 
-		public static IFeedRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse> ProjectRepository(HudsonFreeStyleProjectResponse response)
+		public static IRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse> ProjectRepository(HudsonFreeStyleProjectResponse response)
 		{
 			return new FakeProjectRepository(response);
 		}
 
-		public static IFeedRepository<HudsonQueueRequest, HudsonQueueResponse> QueueRepository(HudsonQueueResponse response)
+		public static IRepository<HudsonQueueRequest, HudsonQueueResponse> QueueRepository(HudsonQueueResponse response)
 		{
 			return new FakeQueueRepository(response);
 		}
 
-		public static IFeedRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse> BuildRepository(HudsonFreeStyleBuildResponse response)
+		public static IRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse> BuildRepository(HudsonFreeStyleBuildResponse response)
 		{
 			return new FakeBuildRepository(response);
 		}
 	}
 
-	public class FakeQueueRepository : IFeedRepository<HudsonQueueRequest, HudsonQueueResponse>
+	public class FakeQueueRepository : IRepository<HudsonQueueRequest, HudsonQueueResponse>
 	{
 		private readonly HudsonQueueResponse _response;
 
@@ -48,7 +48,7 @@ namespace LateRooms.CI.Monitor.Test.Service.Hudson
 		}
 	}
 
-	public class FakeBuildRepository : IFeedRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse>
+	public class FakeBuildRepository : IRepository<HudsonBuildRequest, HudsonFreeStyleBuildResponse>
 	{
 		private readonly HudsonFreeStyleBuildResponse _response;
 
@@ -73,7 +73,7 @@ namespace LateRooms.CI.Monitor.Test.Service.Hudson
 		}
 	}
 
-	public class FakeProjectRepository : IFeedRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse>
+	public class FakeProjectRepository : IRepository<HudsonProjectRequest, HudsonFreeStyleProjectResponse>
 	{
 		private readonly HudsonFreeStyleProjectResponse _response;
 
@@ -98,7 +98,7 @@ namespace LateRooms.CI.Monitor.Test.Service.Hudson
 		}
 	}
 
-	public class FakeProjectListRepository : IFeedRepository<HudsonProjectListRequest, HudsonProjectListResponse>
+	public class FakeProjectListRepository : IRepository<HudsonProjectListRequest, HudsonProjectListResponse>
 	{
 		private readonly HudsonProjectListResponse _response;
 

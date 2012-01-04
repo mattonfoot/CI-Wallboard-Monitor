@@ -1,8 +1,6 @@
-﻿using LateRooms.CI.Monitor.Web.Enums;
-using LateRooms.CI.Monitor.Web.Service;
-using LateRooms.CI.Monitor.Web.Service.Models;
+﻿using LateRooms.CI.Monitor.Web.Service.Models;
 
-namespace LateRooms.CI.Monitor.Web.Controllers
+namespace LateRooms.CI.Monitor.Web.Service
 {
 	public class ProjectListRetriever
 	{

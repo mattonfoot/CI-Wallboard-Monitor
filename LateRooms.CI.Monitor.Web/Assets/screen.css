@@ -1,13 +1,15 @@
 ﻿
 		html, body { margin:0; padding:0; font-size:10px; font-family:sans-serif; color:#fff; background:#222; }
 
-		.dashboard { width:100%; }
-		.dashboard .dashboard-title { line-height:2em; font-size:3em; text-align:center; text-transform:uppercase; }
-
-		.pipeline { margin:1em; padding:1em 1em 0 0; overflow:hidden; border-radius:.5em; background-color:#292929; }
-
 		.row { overflow:hidden; }
-		.column { float:left; overflow:hidden; }
+			.column { float:left; overflow:hidden; }
+
+		.dashboard { width:100%; }
+			.dashboard .dashboard-title { line-height:2em; font-size:3em; text-align:center; text-transform:uppercase; }
+
+		.server { }
+			.server .server-title { line-height:1.5em; font-size:2em; text-align:center; text-transform:uppercase; }
+			.server .pipeline { margin:1em; padding:1em 1em 0 0; overflow:hidden; border-radius:.5em; background-color:#292929; }
 
 		.monitor { position:relative; display:block; margin-left:.5em; margin-bottom:.5em; font-size:2.2em; height:2.5em; line-height:2.5em; overflow:hidden; border-radius:.5em; color:#fff; text-decoration:none; background-color:#700; }
 			.success { background-color:#070; }

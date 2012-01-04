@@ -14,62 +14,32 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 	}
 
 	[XmlRoot(ElementName = "lastbuild")]
-	public class HudsonLastBuildResponse
+	public class HudsonLastBuildResponse : HudsonBuildResponse
 	{
-		[XmlElement(ElementName = "number", DataType = "long")]
-		public long Number { get; set; }
-
-		[XmlElement(ElementName = "url", DataType = "string")]
-		public string Url { get; set; }
 	}
 
 	[XmlRoot(ElementName = "lastCompletedBuild")]
-	public class HudsonLastCompletedBuildResponse
+	public class HudsonLastCompletedBuildResponse : HudsonBuildResponse
 	{
-		[XmlElement(ElementName = "number", DataType = "long")]
-		public long Number { get; set; }
-
-		[XmlElement(ElementName = "url", DataType = "string")]
-		public string Url { get; set; }
 	}
 
 	[XmlRoot(ElementName = "lastFailedBuild")]
-	public class HudsonLastFailedBuildResponse
+	public class HudsonLastFailedBuildResponse : HudsonBuildResponse
 	{
-		[XmlElement(ElementName = "number", DataType = "long")]
-		public long Number { get; set; }
-
-		[XmlElement(ElementName = "url", DataType = "string")]
-		public string Url { get; set; }
 	}
 
 	[XmlRoot(ElementName = "lastStableBuild")]
-	public class HudsonLastStableBuildResponse
+	public class HudsonLastStableBuildResponse : HudsonBuildResponse
 	{
-		[XmlElement(ElementName = "number", DataType = "long")]
-		public long Number { get; set; }
-
-		[XmlElement(ElementName = "url", DataType = "string")]
-		public string Url { get; set; }
 	}
 
 	[XmlRoot(ElementName = "lastSuccessfulBuild")]
-	public class HudsonLastSuccessfulBuildResponse
+	public class HudsonLastSuccessfulBuildResponse : HudsonBuildResponse
 	{
-		[XmlElement(ElementName = "number", DataType = "long")]
-		public long Number { get; set; }
-
-		[XmlElement(ElementName = "url", DataType = "string")]
-		public string Url { get; set; }
 	}
 
 	[XmlRoot(ElementName = "lastUnsuccessfulBuild")]
-	public class HudsonLastUnsuccessfulBuildResponse
+	public class HudsonLastUnsuccessfulBuildResponse : HudsonBuildResponse
 	{
-		[XmlElement(ElementName = "number", DataType = "long")]
-		public long Number { get; set; }
-
-		[XmlElement(ElementName = "url", DataType = "string")]
-		public string Url { get; set; }
 	}
 }

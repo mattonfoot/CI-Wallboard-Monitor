@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using LateRooms.CI.Monitor.Web.Service.Hudson.Responses;
 using LateRooms.CI.Monitor.Web.Service.Models;
 
-namespace LateRooms.CI.Monitor.Web.Service.Hudson
+namespace LateRooms.CI.Monitor.Web.Service.Hudson.Mappers
 {
 	public static class BuildJobMapper
 	{
@@ -26,16 +25,17 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson
 
 		}
 
-		private static SVNChangeSet GetChangeSet(HudsonFreeStyleBuildResponse build)
+		private static IEnumerable<SVNChangeSet> GetChangeSet(HudsonFreeStyleBuildResponse build)
 		{
-			if (build.ChangeSet.Items.Count > 0)
+			if (build.ChangeSets.Count > 0)
 			{
-				var changeset = build.ChangeSet.Items.Select(item => item).FirstOrDefault();
+				var changesetitems = build.ChangeSets.Select(item => item);
 
-				return new SVNChangeSet(changeset.User, changeset.Revision);
+				return changesetitems.SelectMany(x => x.Items)
+					.Select(changeset => new SVNChangeSet(changeset.User, changeset.Revision));
 			}
 
-			return new SVNChangeSet("Unknown", -1);
+			return new List<SVNChangeSet>();
 		}
 	}
 }

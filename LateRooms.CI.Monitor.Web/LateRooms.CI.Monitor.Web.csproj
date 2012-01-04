@@ -79,8 +79,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BootStrap.cs" />
-    <Compile Include="Builders\JobViewModelBuilder.cs" />
-    <Compile Include="Builders\JobViewModelComparer.cs" />
+    <Compile Include="ViewModels\Builders\JobViewModelBuilder.cs" />
+    <Compile Include="ViewModels\Builders\JobViewModelComparer.cs" />
+    <Compile Include="Config\BuildViewConfig.cs" />
+    <Compile Include="Config\BuildFilterConfig.cs" />
     <Compile Include="Config\StructureMapConfiguration.cs" />
     <Compile Include="Config\BuildPipelineConfig.cs" />
     <Compile Include="Config\BuildServerConfig.cs" />
@@ -92,24 +94,23 @@
     <Compile Include="Config\LiveServersConfig.cs" />
     <Compile Include="Config\MonitorConfig.cs" />
     <Compile Include="Service\ServiceFactory.cs" />
-    <Compile Include="Enums\CIServerType.cs" />
-    <Compile Include="Controllers\ProjectListRetriever.cs" />
+    <Compile Include="Service\CIServerType.cs" />
+    <Compile Include="Service\ProjectListRetriever.cs" />
     <Compile Include="Helpers\JavaTimeStamp.cs" />
     <Compile Include="Mvc\ControllerFactory.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Builders\RequestUrlBuilder.cs" />
+    <Compile Include="Service\Connectors\RequestUrlBuilder.cs" />
     <Compile Include="Helpers\XmlSerializer.cs" />
-    <Compile Include="Mappers\BuildJobMapper.cs" />
-    <Compile Include="Mappers\ProjectBuildQueueMapper.cs" />
-    <Compile Include="Mappers\ProjectListMapper.cs" />
-    <Compile Include="Mappers\ProjectMapper.cs" />
-    <Compile Include="Repositories\ServiceNotAvailableException.cs" />
+    <Compile Include="Service\Hudson\Mappers\BuildJobMapper.cs" />
+    <Compile Include="Service\Hudson\Mappers\ProjectBuildQueueMapper.cs" />
+    <Compile Include="Service\Hudson\Mappers\ProjectListMapper.cs" />
+    <Compile Include="Service\Hudson\Mappers\ProjectMapper.cs" />
     <Compile Include="Helpers\XmlFileLoader.cs" />
     <Compile Include="Service\Hudson\Responses\HudsonParameterResponse.cs" />
     <Compile Include="Service\Models\BuildJob.cs" />
     <Compile Include="Service\ICIApiService.cs" />
-    <Compile Include="Repositories\IFeedRepository.cs" />
-    <Compile Include="Builders\DashboardViewModelBuilder.cs" />
+    <Compile Include="Service\Connectors\IRepository.cs" />
+    <Compile Include="ViewModels\Builders\DashboardViewModelBuilder.cs" />
     <Compile Include="Service\Hudson\Requests\HudsonBuildRequest.cs" />
     <Compile Include="Service\Hudson\Requests\HudsonProjectRequest.cs" />
     <Compile Include="Service\Hudson\Requests\HudsonQueueRequest.cs" />
@@ -139,8 +140,8 @@
     <Compile Include="ViewModels\JobViewModel.cs" />
     <Compile Include="ViewModels\PipelineViewModel.cs" />
     <Compile Include="ViewModels\StageViewModel.cs" />
-    <Compile Include="Wrappers\IScopedCacheWrapper.cs" />
-    <Compile Include="Wrappers\RequestScopedCacheWrapper.cs" />
+    <Compile Include="Caching\IScopedCacheWrapper.cs" />
+    <Compile Include="Caching\RequestScopedCacheWrapper.cs" />
     <Compile Include="Service\Hudson\Responses\HudsonJobResponse.cs" />
     <Compile Include="Service\Hudson\HudsonCIApiService.cs" />
     <Compile Include="Service\Hudson\Responses\HudsonRevisionsResponse.cs" />
@@ -148,7 +149,7 @@
     <Compile Include="Service\Hudson\Responses\HudsonScoreResponse.cs" />
     <Compile Include="Service\Hudson\Responses\HudsonTaskResponse.cs" />
     <Compile Include="Mvc\NoCacheAttribute.cs" />
-    <Compile Include="Repositories\XmlFeedRepository.cs" />
+    <Compile Include="Service\Connectors\XmlRepository.cs" />
     <Compile Include="Helpers\XmlDeserializer.cs" />
     <Compile Include="Mvc\SparkEngineInstaller.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
@@ -165,9 +166,6 @@
     <Content Include="Assets\screen.css" />
     <Content Include="Monitors.config" />
     <None Include="Views\Dashboard\_JobViewModel.spark" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Dashboard\DisplayTemplates\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

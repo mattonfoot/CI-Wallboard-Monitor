@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using LateRooms.CI.Monitor.Web.ViewModels;
 
-namespace LateRooms.CI.Monitor.Web.Builders
+namespace LateRooms.CI.Monitor.Web.ViewModels.Builders
 {
 	internal class JobViewModelComparer : IEqualityComparer<JobViewModel>
 	{

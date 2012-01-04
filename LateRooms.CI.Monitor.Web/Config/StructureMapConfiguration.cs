@@ -1,5 +1,5 @@
-﻿using LateRooms.CI.Monitor.Web.Repositories;
-using LateRooms.CI.Monitor.Web.Wrappers;
+﻿using LateRooms.CI.Monitor.Web.Caching;
+using LateRooms.CI.Monitor.Web.Service.Connectors;
 using StructureMap;
 
 namespace LateRooms.CI.Monitor.Web.Config
@@ -18,7 +18,7 @@ namespace LateRooms.CI.Monitor.Web.Config
 
 				x.For<IScopedCacheWrapper>().Use<RequestScopedCacheWrapper>();
 
-				x.For(typeof(IFeedRepository<,>)).Use(typeof(XmlFeedRepository<,>));
+				x.For(typeof(IRepository<,>)).Use(typeof(XmlRepository<,>));
 			});
 		}
 

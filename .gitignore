@@ -1,0 +1,12 @@
+# Lines starting with '#' are considered comments.
+# Ignore any file named foo.txt.
+bin
+obj
+# Ignore (generated) html files
+*.suo
+*.user
+*.Publish.xml
+# except foo.html which is maintained by hand.
+#!foo.html
+# Ignore objects and archives.
+#*.[oa]

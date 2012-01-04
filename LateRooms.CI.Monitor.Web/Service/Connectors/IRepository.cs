@@ -1,6 +1,6 @@
-﻿namespace LateRooms.CI.Monitor.Web.Repositories
+﻿namespace LateRooms.CI.Monitor.Web.Service.Connectors
 {
-	public interface IFeedRepository<TRequest, TResponse>
+	public interface IRepository<TRequest, TResponse>
 			where TRequest : new() 
 			where TResponse : new()
 	{

@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 {
@@ -6,7 +7,7 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 	public class HudsonScorecardResponse
 	{
 		[XmlElement(ElementName = "score")]
-		public HudsonScoreResponse Score { get; set; }
+		public List<HudsonScoreResponse> Score { get; set; }
 
 		[XmlElement(ElementName = "totalPoints", DataType = "string")]
 		public string TotalPoints { get; set; }
@@ -16,7 +17,7 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 	{
 		public HudsonEmptyScorecardResponse()
 		{
-			Score = new HudsonScoreResponse();
+			Score = new List<HudsonScoreResponse>();
 			TotalPoints = "0";
 		}
 	}

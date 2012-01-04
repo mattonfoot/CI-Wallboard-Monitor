@@ -9,7 +9,7 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 		public HudsonFreeStyleBuildResponse()
 		{
 			Actions = new List<HudsonActionResponse>();
-			ChangeSet = new HudsonChangeSetResponse();
+			ChangeSets = new List<HudsonChangeSetResponse>();
 		}
 
 		[XmlElement(ElementName = "action")]
@@ -46,6 +46,6 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 		public string BuiltOn { get; set; }
 
 		[XmlElement(ElementName = "changeSet")]
-		public HudsonChangeSetResponse ChangeSet { get; set; }
+		public List<HudsonChangeSetResponse> ChangeSets { get; set; }
 	}
 }

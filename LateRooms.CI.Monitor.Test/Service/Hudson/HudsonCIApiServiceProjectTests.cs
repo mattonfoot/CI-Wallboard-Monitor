@@ -68,12 +68,12 @@ namespace LateRooms.CI.Monitor.Test.Service.Hudson
 														Buildable = true,
 														Builds = new List<HudsonBuildResponse> { fakedBuildResponse },
 														FirstBuild = fakedBuildResponse,
-														LastBuild = fakedLastBuildResponse,
-														LastCompletedBuild = fakedLastCompletedBuildResponse,
-														LastFailedBuild = fakedLastFailedBuildResponse,
-														LastSuccessfulBuild = fakedLastSuccessfulBuildResponse,
-														LastUnsuccessfulBuild = fakedLastUnsuccessfulBuildResponse
-			                   	};
+														LastBuild = new List<HudsonLastBuildResponse> { fakedLastBuildResponse },
+														LastCompletedBuild = new List<HudsonLastCompletedBuildResponse> { fakedLastCompletedBuildResponse },
+														LastFailedBuild = new List<HudsonLastFailedBuildResponse> { fakedLastFailedBuildResponse },
+														LastSuccessfulBuild = new List<HudsonLastSuccessfulBuildResponse> { fakedLastSuccessfulBuildResponse },
+														LastUnsuccessfulBuild = new List<HudsonLastUnsuccessfulBuildResponse> { fakedLastUnsuccessfulBuildResponse }
+													};
 
 			_queueResponse = new HudsonQueueResponse();
 			_buildResponse = new HudsonFreeStyleBuildResponse

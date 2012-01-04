@@ -16,28 +16,12 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 	}
 
 	[XmlRoot(ElementName = "downstreamProject")]
-	public class HudsonDownstreamProjectResponse
+	public class HudsonDownstreamProjectResponse : HudsonJobResponse
 	{
-		[XmlElement(ElementName = "name", DataType = "string")]
-		public string Name { get; set; }
-
-		[XmlElement(ElementName = "url", DataType = "string")]
-		public string Url { get; set; }
-
-		[XmlElement(ElementName = "color", DataType = "string")]
-		public string Color { get; set; }
 	}
 
 	[XmlRoot(ElementName = "upstreamProject")]
-	public class HudsonUpstreamProjectResponse
+	public class HudsonUpstreamProjectResponse : HudsonJobResponse
 	{
-		[XmlElement(ElementName = "name", DataType = "string")]
-		public string Name { get; set; }
-
-		[XmlElement(ElementName = "url", DataType = "string")]
-		public string Url { get; set; }
-
-		[XmlElement(ElementName = "color", DataType = "string")]
-		public string Color { get; set; }
 	}
 }

@@ -17,14 +17,14 @@ namespace LateRooms.CI.Monitor.Web.Helpers
 			return (T)xs.Deserialize(memoryStream);
 		}
 
-		public static T From<T>(XmlDocument xmlDoc) where T : new()
+		public static T From<T>(XmlDocument xmlDoc, string originalXml) where T : new()
 		{
 			var xmlRoot = xmlDoc.DocumentElement;
 
-			return xmlRoot != null ? From<T>(new XmlNodeReader(xmlRoot)) : new T();
+			return xmlRoot != null ? From<T>(new XmlNodeReader(xmlRoot), originalXml) : new T();
 		}
 
-		public static T From<T>(XmlReader xmlReader)
+		public static T From<T>(XmlReader xmlReader, string originalXml)
 		{
 			var xs = new System.Xml.Serialization.XmlSerializer(typeof(T));
 

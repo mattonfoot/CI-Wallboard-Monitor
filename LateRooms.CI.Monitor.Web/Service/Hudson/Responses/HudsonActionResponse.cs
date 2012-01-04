@@ -10,8 +10,8 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 		{
 			Causes = new List<HudsonCauseResponse>();
 			Parameters = new List<HudsonParameterResponse>();
-			Participant = new HudsonEmptyParticipantResponse();
-			Scorecard = new HudsonEmptyScorecardResponse();
+			Participant = new List<HudsonParticipantResponse>();
+			Scorecard = new List<HudsonScorecardResponse>();
 		}
 
 		[XmlElement(ElementName = "cause")]
@@ -33,9 +33,9 @@ namespace LateRooms.CI.Monitor.Web.Service.Hudson.Responses
 		public string URLName { get; set; }
 
 		[XmlElement(ElementName = "participant")]
-		public HudsonParticipantResponse Participant { get; set; }
+		public List<HudsonParticipantResponse> Participant { get; set; }
 
 		[XmlElement(ElementName = "scorecard")]
-		public HudsonScorecardResponse Scorecard { get; set; }
+		public List<HudsonScorecardResponse> Scorecard { get; set; }
 	}
 }

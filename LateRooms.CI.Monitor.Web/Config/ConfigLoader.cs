@@ -1,5 +1,4 @@
-﻿using LateRooms.CI.Monitor.Web.Controllers;
-using LateRooms.CI.Monitor.Web.Helpers;
+﻿using LateRooms.CI.Monitor.Web.Helpers;
 
 namespace LateRooms.CI.Monitor.Web.Config
 {

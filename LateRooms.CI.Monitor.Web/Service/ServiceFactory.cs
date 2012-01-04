@@ -1,8 +1,8 @@
-﻿using LateRooms.CI.Monitor.Web.Repositories;
+﻿using LateRooms.CI.Monitor.Web.Caching;
+using LateRooms.CI.Monitor.Web.Service.Connectors;
 using LateRooms.CI.Monitor.Web.Service.Hudson;
 using LateRooms.CI.Monitor.Web.Service.Hudson.Requests;
 using LateRooms.CI.Monitor.Web.Service.Hudson.Responses;
-using LateRooms.CI.Monitor.Web.Wrappers;
 using StructureMap;
 
 namespace LateRooms.CI.Monitor.Web.Service
@@ -26,13 +26,13 @@ namespace LateRooms.CI.Monitor.Web.Service
 			);
 		}
 
-		private static IFeedRepository<TRequest, TResponse> BuildHudsonFeedRepository<TRequest, TResponse>(string serverUri)
+		private static IRepository<TRequest, TResponse> BuildHudsonFeedRepository<TRequest, TResponse>(string serverUri)
 			where TRequest : new()
 			where TResponse : new()
 		{
 			var scope = ObjectFactory.GetInstance<IScopedCacheWrapper>();
 
-			return new XmlFeedRepository<TRequest, TResponse>(scope) { ServerUri = serverUri };
+			return new XmlRepository<TRequest, TResponse>(scope) { ServerUri = serverUri };
 		}
 	}
 }

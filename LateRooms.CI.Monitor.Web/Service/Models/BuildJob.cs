@@ -1,12 +1,10 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LateRooms.CI.Monitor.Web.Service.Models
 {
 	public class BuildJob
 	{
-		public BuildJob(string projectName, string result, int number, string url, bool status, int duration, long timestamp, bool isbuilding, SVNChangeSet changeset, Dictionary<string,string> parameters)
+		public BuildJob(string projectName, string result, int number, string url, bool status, int duration, long timestamp, bool isbuilding, IEnumerable<SVNChangeSet> changeset, IDictionary<string,string> parameters)
 		{
 			ProjectName = projectName;
 			Result = result;
@@ -20,7 +18,7 @@ namespace LateRooms.CI.Monitor.Web.Service.Models
 			Parameters = parameters;
 		}
 
-		public Dictionary<string, string> Parameters { get; set; }
+		public IDictionary<string, string> Parameters { get; set; }
 
 		public string ProjectName { get; private set; }
 
@@ -38,6 +36,14 @@ namespace LateRooms.CI.Monitor.Web.Service.Models
 
 		public bool IsBuilding { get; set; }
 
-		public SVNChangeSet SvnChangeSet { get; set; }
+		public IEnumerable<SVNChangeSet> SvnChangeSet { get; set; }
+	}
+
+	class NullBuildJob : BuildJob
+	{
+		public NullBuildJob()
+			: base(string.Empty, string.Empty, 0, string.Empty, true, 0, 0, false, new List<SVNChangeSet>(), new Dictionary<string, string>())
+		{
+		}
 	}
 }
