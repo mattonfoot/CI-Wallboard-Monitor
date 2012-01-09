@@ -1,6 +1,6 @@
 ﻿using LateRooms.CI.Monitor.Web.Helpers;
 
-namespace LateRooms.CI.Monitor.Web.Config
+namespace LateRooms.CI.Monitor.Web.Config.Models
 {
 	public class ConfigLoader
 	{

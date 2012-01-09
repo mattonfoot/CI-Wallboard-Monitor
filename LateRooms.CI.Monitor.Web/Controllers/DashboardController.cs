@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
 using LateRooms.CI.Monitor.Web.Caching;
+using LateRooms.CI.Monitor.Web.Config.Models;
 using LateRooms.CI.Monitor.Web.Mvc;
 using LateRooms.CI.Monitor.Web.Config;
 using LateRooms.CI.Monitor.Web.Helpers;
@@ -65,17 +66,17 @@ namespace LateRooms.CI.Monitor.Web.Controllers
 			                              	.Select(x => x.OuterHtml);
 		}
 
+		private static bool IsMonitoredServer(IEnumerable<LiveServerConfig> servers, string monitor)
+		{
+			return servers.Select(x => x.Name).Any(monitor.Contains);
+		}
+
 		private ProjectList GetProjectList(BuildServerConfig config)
 		{
 			var buildservertype = (CIServerType)Enum.Parse(typeof(CIServerType), config.Type);
 			var projectListRetriever = new ProjectListRetriever(buildservertype, config.ServiceUri);
 
 			return projectListRetriever.GetProjectList();
-		}
-
-		private static bool IsMonitoredServer(IEnumerable<LiveServerConfig> servers, string monitor)
-		{
-			return servers.Select(x => x.Name).Any(monitor.Contains);
 		}
 	}
 }

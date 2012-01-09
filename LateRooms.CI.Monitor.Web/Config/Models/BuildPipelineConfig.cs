@@ -1,9 +1,9 @@
 ﻿using System.Xml.Serialization;
 
-namespace LateRooms.CI.Monitor.Web.Config
+namespace LateRooms.CI.Monitor.Web.Config.Models
 {
-	[XmlRoot("view")]
-	public class BuildViewConfig
+	[XmlRoot("pipeline")]
+	public class BuildPipelineConfig
 	{
 		[XmlAttribute("name")]
 		public string Name { get; set; }

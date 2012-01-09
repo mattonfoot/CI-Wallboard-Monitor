@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace LateRooms.CI.Monitor.Web.Config
+namespace LateRooms.CI.Monitor.Web.Config.Models
 {
 	[XmlRoot("filter")]
 	public class BuildFilterConfig

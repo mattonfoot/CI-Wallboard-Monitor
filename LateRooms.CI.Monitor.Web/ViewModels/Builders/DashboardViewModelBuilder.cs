@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using LateRooms.CI.Monitor.Web.Config;
+using LateRooms.CI.Monitor.Web.Config.Models;
 using LateRooms.CI.Monitor.Web.Service.Models;
 
 namespace LateRooms.CI.Monitor.Web.ViewModels.Builders

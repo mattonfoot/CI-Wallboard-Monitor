@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace LateRooms.CI.Monitor.Web.Config
+namespace LateRooms.CI.Monitor.Web.Config.Models
 {
 	[XmlRoot("liveservers")]
 	public class LiveServersConfig
