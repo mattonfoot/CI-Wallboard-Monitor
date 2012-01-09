@@ -79,20 +79,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BootStrap.cs" />
-    <Compile Include="ViewModels\Builders\JobViewModelBuilder.cs" />
-    <Compile Include="ViewModels\Builders\JobViewModelComparer.cs" />
-    <Compile Include="Config\Models\BuildViewConfig.cs" />
     <Compile Include="Config\Models\BuildFilterConfig.cs" />
-    <Compile Include="Config\StructureMapConfiguration.cs" />
     <Compile Include="Config\Models\BuildPipelineConfig.cs" />
     <Compile Include="Config\Models\BuildServerConfig.cs" />
     <Compile Include="Config\Models\BuildServersConfig.cs" />
+    <Compile Include="Config\Models\BuildViewConfig.cs" />
     <Compile Include="Config\Models\ConfigLoader.cs" />
     <Compile Include="Config\Models\ErrorLogConfig.cs" />
     <Compile Include="Config\Models\ErrorLogSiteConfig.cs" />
     <Compile Include="Config\Models\LiveServerConfig.cs" />
     <Compile Include="Config\Models\LiveServersConfig.cs" />
     <Compile Include="Config\Models\MonitorConfig.cs" />
+    <Compile Include="ViewModels\Builders\JobViewModelBuilder.cs" />
+    <Compile Include="ViewModels\Builders\JobViewModelComparer.cs" />
+    <Compile Include="Config\StructureMapConfiguration.cs" />
     <Compile Include="Service\ServiceFactory.cs" />
     <Compile Include="Service\CIServerType.cs" />
     <Compile Include="Service\ProjectListRetriever.cs" />
